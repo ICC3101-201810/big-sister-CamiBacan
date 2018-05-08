@@ -42,6 +42,15 @@ namespace LabPOO
                     else if (answer == "3")
                     {
                         PrintCart();
+                        Console.WriteLine("\n\n\tPresiona 00 para sacar algo del carrito");
+                        string ans = Console.ReadLine();
+                        if (ans == "00")
+                        {
+                            Console.WriteLine("\nEscoja item a borrar...");
+                            int index = Convert.ToInt32(Console.ReadLine());
+                            SacarDelCarro(cart[index]);                   
+                            
+                        }
                         break;
                     }
                     else if (answer == "4")
@@ -67,7 +76,7 @@ namespace LabPOO
             }
             Console.WriteLine("El total de tu compra es: $" + total.ToString());
             Console.Write("Este programa se cerrará en ");
-            for (int i = 5; i > 0; i--)
+            for(int i = 5; i > 0; i--)
             {
                 Console.Write(i.ToString() + " ");
                 Thread.Sleep(1000);
@@ -120,7 +129,8 @@ namespace LabPOO
 
         public static void PrintProduct(int index, Product product)
         {
-            Console.WriteLine(String.Format("{0}. {1}\n\tPrecio: ${2}\t{3}\tStock: {4}\n", index.ToString(), product.Name, product.Price, product.Unit, product.Stock));
+            Console.WriteLine(String.Format("{0}. {1}\n\tPrecio: ${2}\t{3}\tStock: {4}\n", index.ToString(), 
+                product.Name, product.Price, product.Unit, product.Stock));
         }
 
         public static void PrintHeader()
@@ -132,6 +142,11 @@ namespace LabPOO
         public static bool AddToCart(Product product)
         {
             return product.Agregar(cart);
+        }
+        
+        public static bool SacarDelCarro(Product product)
+        {
+            return product.Borrar(cart);
         }
 
         public static void SupplyStore()
