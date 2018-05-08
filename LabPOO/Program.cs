@@ -4,9 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 namespace LabPOO
 {
+    public delegate void BigSister(string message);
+    
+    [Serializable]
     class Program
     {
         public static List<Product> cart;
@@ -42,9 +46,9 @@ namespace LabPOO
                     else if (answer == "3")
                     {
                         PrintCart();
-                        Console.WriteLine("\n\n\tPresiona 00 para sacar algo del carrito");
+                        Console.WriteLine("\n\n\tPresione 0 para sacar algo del carrito");
                         string ans = Console.ReadLine();
-                        if (ans == "00")
+                        if (ans == "0")
                         {
                             Console.WriteLine("\nEscoja item a borrar...");
                             int index = Convert.ToInt32(Console.ReadLine());
@@ -64,6 +68,11 @@ namespace LabPOO
                     }
                 }
             }
+        }
+
+        public static bool VerificarCarrito(List<Product> carrito)
+        {
+            return true;
         }
 
         public static void Pay()
