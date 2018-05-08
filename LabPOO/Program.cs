@@ -6,6 +6,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
+
 namespace LabPOO
 {
     public delegate void BigSister(string message);
@@ -46,7 +48,7 @@ namespace LabPOO
                     else if (answer == "3")
                     {
                         PrintCart();
-                        Console.WriteLine("\n\n\tPresione 0 para sacar algo del carrito");
+                        Console.WriteLine("\n\n\tPresione 0 para sacar algo del carrito, o ENTER para volver al supermercado");
                         string ans = Console.ReadLine();
                         if (ans == "0")
                         {
@@ -111,6 +113,13 @@ namespace LabPOO
                         continue;
                     }
                     AddToCart(market[answer]);
+                    using (StreamWriter sr = new StreamWriter("cart.txt"))
+                    {
+                        MemoryStream stream = new MemoryStream();
+                        IFormatter formatter = new BinaryFormatter();
+                        formatter.Serialize(stream, cart);
+                        sr.Close();
+                    }
                     break;
                 }
                 catch
@@ -150,6 +159,7 @@ namespace LabPOO
 
         public static bool AddToCart(Product product)
         {
+
             return product.Agregar(cart);
         }
         
